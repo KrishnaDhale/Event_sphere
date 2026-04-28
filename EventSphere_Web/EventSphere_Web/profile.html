@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - EventSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-left">
+            <img src="resources/logo.png" alt="EventSphere Logo" class="nav-logo">
+            <span class="nav-brand">EventSphere</span>
+        </div>
+        <div class="nav-right">
+            <nav class="nav-links">
+                <a href="home.html">Browse Events</a>
+                <a href="my-tickets.html">My Tickets</a>
+                <a href="resale.html">Resale Market</a>
+            </nav>
+            <a href="profile.html" class="profile-link active" title="My Profile">
+                <img src="resources/user.png" alt="Profile" class="profile-pic" style="border-color: var(--primary-color);">
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="profile-wrapper">
+            <div class="profile-header ed-card" style="text-align: center; margin-bottom: 2rem;">
+                <div style="position: relative; display: inline-block;">
+                    <img src="resources/user.png" alt="Profile Picture" class="profile-main-pic">
+                    <div class="edit-pic-badge">✏️</div>
+                </div>
+                <h1 id="profName" style="margin-top: 15px; font-weight: 800; color: var(--text-dark);">Loading...</h1>
+                <p id="profEmail" style="color: var(--text-light); font-size: 1.05rem;">user@example.com</p>
+                <div style="margin-top: 15px;">
+                    <span class="badge-success" style="background: rgba(16, 185, 129, 0.1); color: var(--success-color); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">Verified Account</span>
+                </div>
+            </div>
+
+            <div class="settings-list">
+                <div class="settings-item" onclick="openProfileModal('editProfileModal')">
+                    <div class="settings-info">
+                        <span style="font-size: 1.2rem;">👤</span>
+                        <div>
+                            <strong>Edit Profile</strong>
+                            <p>Update your name and personal details</p>
+                        </div>
+                    </div>
+                    <span style="color: var(--text-light);">❯</span>
+                </div>
+
+                <div class="settings-item" onclick="openProfileModal('changePasswordModal')">
+                    <div class="settings-info">
+                        <span style="font-size: 1.2rem;">🔒</span>
+                        <div>
+                            <strong>Change Password</strong>
+                            <p>Ensure your account stays secure</p>
+                        </div>
+                    </div>
+                    <span style="color: var(--text-light);">❯</span>
+                </div>
+
+                <div class="settings-item" onclick="openProfileModal('contactUsModal')">
+                    <div class="settings-info">
+                        <span style="font-size: 1.2rem;">🎧</span>
+                        <div>
+                            <strong>Contact Us</strong>
+                            <p>Need help? Reach out to support</p>
+                        </div>
+                    </div>
+                    <span style="color: var(--text-light);">❯</span>
+                </div>
+            </div>
+
+            <button class="btn-danger premium-btn" style="margin-top: 2rem; background-color: #fee2e2; color: #dc2626; box-shadow: none; border: 2px solid #fecaca;" onclick="logout()">
+                Log Out
+            </button>
+        </div>
+    </main>
+
+    <div id="editProfileModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 400px; text-align: left;">
+            <span class="close-modal" onclick="closeProfileModal('editProfileModal')">&times;</span>
+            <h2 style="margin-bottom: 20px;">Edit Profile</h2>
+            <form id="editProfileForm">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="editEmail" required readonly style="background: var(--secondary-color); cursor: not-allowed;" title="Email cannot be changed">
+                </div>
+                <button type="submit" class="btn-primary premium-btn" style="margin-top: 10px;">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="changePasswordModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 400px; text-align: left;">
+            <span class="close-modal" onclick="closeProfileModal('changePasswordModal')">&times;</span>
+            <h2 style="margin-bottom: 20px;">Change Password</h2>
+            <form id="changePasswordForm">
+                <div class="input-group">
+                    <label>Current Password</label>
+                    <input type="password" id="currPass" required>
+                </div>
+                <div class="input-group">
+                    <label>New Password</label>
+                    <input type="password" id="newPass" required>
+                </div>
+                <div class="input-group">
+                    <label>Confirm New Password</label>
+                    <input type="password" id="confPass" required>
+                </div>
+                <button type="submit" class="btn-primary premium-btn" style="margin-top: 10px;">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="contactUsModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 400px; text-align: left;">
+            <span class="close-modal" onclick="closeProfileModal('contactUsModal')">&times;</span>
+            <h2 style="margin-bottom: 20px;">Contact Support</h2>
+            <form id="contactUsForm">
+                <div class="input-group">
+                    <label>Subject</label>
+                    <input type="text" placeholder="What do you need help with?" required>
+                </div>
+                <div class="input-group">
+                    <label>Message</label>
+                    <textarea placeholder="Describe your issue..." required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; min-height: 100px; resize: vertical; outline: none; font-family: var(--font-family);"></textarea>
+                </div>
+                <button type="submit" class="btn-primary premium-btn" style="margin-top: 10px;">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script> <script src="js/app.js"></script>
+</body>
+</html>

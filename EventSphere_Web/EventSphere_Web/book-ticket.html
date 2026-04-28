@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - EventSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-left">
+            <img src="resources/logo.png" alt="EventSphere Logo" class="nav-logo">
+            <span class="nav-brand">EventSphere</span>
+        </div>
+        <div class="nav-right">
+            <nav class="nav-links">
+                <a href="home.html" class="active">Browse Events</a>
+                <a href="my-tickets.html">My Tickets</a>
+                <a href="resale.html">Resale Market</a>
+            </nav>
+            <a href="profile.html" class="profile-link" title="My Profile">
+                <img src="resources/user.png" alt="Profile" class="profile-pic">
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header" style="margin-bottom: 2rem;">
+            <h1>Secure Checkout</h1>
+            <p class="subtitle">Complete your details to secure your tickets.</p>
+        </div>
+
+        <div class="checkout-grid">
+            <div class="checkout-form-section ed-card">
+                <h3 style="margin-bottom: 1.5rem; font-size: 1.3rem;">Contact Details</h3>
+                <form id="checkoutForm">
+                    <div class="input-group">
+                        <label for="buyerName">Full Name</label>
+                        <input type="text" id="buyerName" required readonly style="background-color: var(--secondary-color);">
+                    </div>
+                    <div class="input-group">
+                        <label for="buyerEmail">Email Address</label>
+                        <input type="email" id="buyerEmail" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="buyerPhone">Mobile Number</label>
+                        <input type="tel" id="buyerPhone" placeholder="Enter 10-digit mobile number" required pattern="[0-9]{10}">
+                    </div>
+                    
+                    <h3 style="margin: 2rem 0 1.5rem; font-size: 1.3rem;">Ticket Configuration</h3>
+                    <div class="input-group">
+                        <label for="ticketCount">Number of Tickets</label>
+                        <input type="number" id="ticketCount" min="1" max="5" value="1" required onchange="updateCheckoutTotal()">
+                        <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">Maximum 5 tickets per transaction.</p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="checkout-summary-section">
+                <div class="summary-card">
+                    <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 15px;">Order Summary</h3>
+                    
+                    <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                        <img id="chkEventImg" src="" alt="Event" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover;">
+                        <div>
+                            <h4 id="chkEventTitle" style="color: var(--text-dark); margin-bottom: 5px;">Event Name</h4>
+                            <p id="chkEventDate" style="color: var(--text-light); font-size: 0.85rem;">Date</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Price per ticket</span>
+                        <span id="chkBasePrice">₹0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Quantity</span>
+                        <span id="chkQty">x1</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Platform Fee</span>
+                        <span>₹50</span>
+                    </div>
+                    
+                    <hr class="divider">
+                    
+                    <div class="summary-row total">
+                        <span>Total Amount</span>
+                        <span id="chkTotalAmount" style="color: var(--primary-color);">₹0</span>
+                    </div>
+
+                    <button class="btn-primary premium-btn" style="margin-top: 20px;" onclick="openPaymentModal()">Proceed to Pay Now</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 450px;">
+            <span class="close-modal" onclick="closePaymentModal()">&times;</span>
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark);">Payment Gateway</h2>
+                <p style="color: var(--text-light); font-size: 0.95rem;">Select your preferred payment method</p>
+            </div>
+            
+            <div class="payment-summary-box">
+                <p style="font-size: 0.9rem; color: var(--text-light);">Amount to Pay</p>
+                <h2 id="payModalTotal" style="color: var(--primary-color); font-size: 2.2rem; margin: 5px 0;">₹0</h2>
+                <p id="payModalDetails" style="font-size: 0.9rem; font-weight: 600;">Event Name (x1 Tickets)</p>
+            </div>
+
+            <div class="payment-methods">
+                <label class="payment-option">
+                    <input type="radio" name="payMethod" value="UPI" checked>
+                    <div class="pay-card">
+                        <strong>UPI (GPay, PhonePe, Paytm)</strong>
+                        <p>Instant digital payment</p>
+                    </div>
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="payMethod" value="Card">
+                    <div class="pay-card">
+                        <strong>Credit / Debit Card</strong>
+                        <p>Visa, MasterCard, RuPay</p>
+                    </div>
+                </label>
+            </div>
+
+            <button id="confirmPaymentBtn" class="btn-success premium-btn" style="margin-top: 15px;">Confirm Payment</button>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventSphere - My Tickets</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-left">
+            <img src="resources/logo.png" alt="EventSphere Logo" class="nav-logo">
+            <span class="nav-brand">EventSphere</span>
+        </div>
+        
+        <div class="nav-right">
+            <nav class="nav-links">
+                <a href="home.html">Browse Events</a>
+                <a href="my-tickets.html" class="active">My Tickets</a>
+                <a href="resale.html">Resale Market</a>
+            </nav>
+            
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="Search my tickets..." onkeyup="filterMyTickets()">
+            </div>
+            
+            <a href="profile.html" class="profile-link" title="My Profile">
+                <img src="resources/user.png" alt="Profile" class="profile-pic">
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>My Booked Tickets</h1>
+            <p class="subtitle">Click on any ticket to view your QR code pass or list it for resale</p>
+        </div>
+        
+        <div id="my-tickets-container" class="event-grid">
+            </div>
+    </main>
+
+    <div id="ticketModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="qr-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <rect width="100" height="100" fill="white"/>
+                    <path d="M10,10 h25 v25 h-25 z M15,15 h15 v15 h-15 z" fill="var(--text-dark)"/>
+                    <path d="M65,10 h25 v25 h-25 z M70,15 h15 v15 h-15 z" fill="var(--text-dark)"/>
+                    <path d="M10,65 h25 v25 h-25 z M15,70 h15 v15 h-15 z" fill="var(--text-dark)"/>
+                    <rect x="45" y="10" width="10" height="10" fill="var(--text-dark)"/>
+                    <rect x="10" y="45" width="20" height="10" fill="var(--text-dark)"/>
+                    <rect x="40" y="40" width="50" height="50" fill="var(--text-dark)"/>
+                    <rect x="45" y="45" width="40" height="40" fill="white"/>
+                    <rect x="55" y="55" width="20" height="20" fill="var(--primary-color)"/>
+                    <rect x="45" y="65" width="10" height="10" fill="var(--text-dark)"/>
+                    <rect x="75" y="45" width="10" height="10" fill="var(--text-dark)"/>
+                </svg>
+            </div>
+            <div class="modal-details">
+                <h2 id="modalEventTitle">Event Name</h2>
+                <p>📅 <strong id="modalEventDate">Date</strong></p>
+                <p>📍 <span id="modalEventLocation">Location</span></p>
+                <p style="margin-top: 10px; font-size: 0.85rem;">Ticket ID: <strong id="modalTicketId">#00000</strong></p>
+                
+                <hr class="divider">
+                
+                <button id="modalResellBtn" class="btn-danger">Sell in Resale Market</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
